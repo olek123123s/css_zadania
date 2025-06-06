@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Właściwości tla w CSS</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+    }
+    td, th {
+      border: 1px solid #000;
+      padding: 10px;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .section-title {
+      font-weight: bold;
+    }
+    body {
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tabela: Właściwości Tła w CSS</h1>
+
+  <table>
+    <tr>
+      <th class="section-title">Kolor tła</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background-color: kolor;}</code><br>
+        Przykład: <code>body {background-color: lightgreen;}</code>
+      </td>
+    </tr>
+    <tr>
+      <th class="section-title">Tło Obrazkowe</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background-image: url(adres);}</code><br>
+        Przykład: <code>background-image: url("file:///C:/CSS/tlo1.jpg");</code>
+      </td>
+    </tr>
+    <tr>
+      <th class="section-title">Powtarzanie tła</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background-repeat: wartość;}</code><br>
+        Przykład: <code>body {background-repeat: no-repeat;}</code><br>
+        Parametry: repeat, repeat-x, repeat-y, no-repeat
+      </td>
+    </tr>
+    <tr>
+      <th class="section-title">Pozycja tła</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background-position: pozycja;}</code><br>
+        Przykład: <code>body {background-position: right bottom;}</code><br>
+        Parametry: left, right, center, top, bottom, px, %, cm
+      </td>
+    </tr>
+    <tr>
+      <th class="section-title">Zaczepienie tła</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background-attachment: wartość;}</code><br>
+        Przykład: <code>body {background-attachment: fixed;}</code><br>
+        Parametry: scroll, fixed
+      </td>
+    </tr>
+    <tr>
+      <th class="section-title">Łączenie atrybutów tła</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background: kolor url(...) repeat pozycja;}</code><br>
+        Przykład: <code>body {background: #ccc url("grafiki/tlo_1.jpg") no-repeat center fixed;}</code>
+      </td>
+    </tr>
+    <tr>
+      <th class="section-title">Gradient liniowy</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background: linear-gradient(kierunek, kolor1, kolor2);}</code><br>
+        Przykład: <code>body {background: linear-gradient(to right, red, yellow);}</code><br>
+        Parametry: to right, to bottom, 45deg, kolory
+      </td>
+    </tr>
+    <tr>
+      <th class="section-title">Gradient promienisty</th>
+      <td>
+        Jednozadaniowy opis:<br>
+        <code>selektor {background: radial-gradient(kształt at pozycja, kolory);}</code><br>
+        Przykład: <code>body {background: radial-gradient(circle at center, white, blue);}</code><br>
+        Parametry: circle, ellipse, center, top, kolory
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
