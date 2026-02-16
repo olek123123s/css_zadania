@@ -2,11 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Tablice - Poziom 1</title>
+    <title>Poziom 2 – Pętle + Logika</title>
 </head>
 <body>
 
-<h2>Poziom 1 – Podstawy tablic</h2>
+<h2>Poziom 2 – Pętle + Logika</h2>
 
 <p id="z1"></p>
 <p id="z2"></p>
@@ -16,51 +16,71 @@
 <script>
 
     // ===== ZADANIE 1 =====
-    let imiona = ["Ola", "Adam", "Kasia", "Bartek", "Zosia"];
+    let oceny = [2, 3, 5, 4, 1, 5];
+
+    let suma = 0;
+    let pozytywne = "";
+
+    for (let i = 0; i < oceny.length; i++) {
+        suma += oceny[i];
+
+        if (oceny[i] > 1) {   // pozytywne (2,3,4,5)
+            pozytywne += oceny[i] + " ";
+        }
+    }
+
+    let srednia = suma / oceny.length;
 
     document.getElementById("z1").innerText =
-        "Zadanie 1: Długość = " + imiona.length +
-        ", Pierwsze = " + imiona[0] +
-        ", Ostatnie = " + imiona[imiona.length - 1];
+        "Zadanie 1: Średnia = " + srednia.toFixed(2) +
+        ", Oceny pozytywne = " + pozytywne;
 
 
     // ===== ZADANIE 2 =====
-    function sumaTablicy(tablica) {
-        let suma = 0;
+    function tylkoParzyste(tablica) {
+        let nowa = [];
+
         for (let i = 0; i < tablica.length; i++) {
-            suma += tablica[i];
+            if (tablica[i] % 2 === 0) {
+                nowa.push(tablica[i]);
+            }
         }
-        return suma;
+
+        return nowa;
     }
 
-    let liczby1 = [5, 10, 15, 20];
+    let liczby = [1, 2, 3, 4, 5, 6];
 
     document.getElementById("z2").innerText =
-        "Zadanie 2: Suma = " + sumaTablicy(liczby1);
+        "Zadanie 2: Liczby parzyste = " + tylkoParzyste(liczby);
 
 
     // ===== ZADANIE 3 =====
-    let liczby2 = [3, 7, 1, 9, 4];
-    let max = liczby2[0];
+    let jezyki = ["HTML", "CSS", "JS"];
+    let odwrocona = [];
 
-    for (let i = 1; i < liczby2.length; i++) {
-        if (liczby2[i] > max) {
-            max = liczby2[i];
-        }
+    for (let i = jezyki.length - 1; i >= 0; i--) {
+        odwrocona.push(jezyki[i]);
     }
 
     document.getElementById("z3").innerText =
-        "Zadanie 3: Największa liczba = " + max;
+        "Zadanie 3: Odwrocona tablica = " + odwrocona;
 
 
     // ===== ZADANIE 4 =====
-    let liczby3 = [2, 4, 6, 8, 10];
+    function czyZawiera(tablica, element) {
+        for (let i = 0; i < tablica.length; i++) {
+            if (tablica[i] === element) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    liczby3.unshift(0);
-    liczby3.push(12);
+    let wynik = czyZawiera(jezyki, "CSS");
 
     document.getElementById("z4").innerText =
-        "Zadanie 4: Tablica = " + liczby3;
+        "Zadanie 4: Czy zawiera 'CSS'? = " + wynik;
 
 </script>
 
