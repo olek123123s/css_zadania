@@ -1,98 +1,68 @@
-body {
-    margin: 0;
-    padding: 20px;
-    background: #f5f5f5;
-    font-family: Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Tablice - Poziom 1</title>
+</head>
+<body>
 
-.chat-container {
-    max-width: 500px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+<h2>Poziom 1 – Podstawy tablic</h2>
 
-.chat-header {
-    background: #0084ff;
-    color: white;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+<p id="z1"></p>
+<p id="z2"></p>
+<p id="z3"></p>
+<p id="z4"></p>
 
-.avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-}
+<script>
 
-.user-info h2 {
-    margin: 0;
-    font-size: 18px;
-}
+    // ===== ZADANIE 1 =====
+    let imiona = ["Ola", "Adam", "Kasia", "Bartek", "Zosia"];
 
-.user-info p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    opacity: 0.9;
-}
+    document.getElementById("z1").innerText =
+        "Zadanie 1: Długość = " + imiona.length +
+        ", Pierwsze = " + imiona[0] +
+        ", Ostatnie = " + imiona[imiona.length - 1];
 
-.messages {
-    padding: 20px;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.message {
-    max-width: 70%;
-    padding: 10px 15px;
-    border-radius: 20px;
-    word-wrap: break-word;
-}
+    // ===== ZADANIE 2 =====
+    function sumaTablicy(tablica) {
+        let suma = 0;
+        for (let i = 0; i < tablica.length; i++) {
+            suma += tablica[i];
+        }
+        return suma;
+    }
 
-.received {
-    align-self: flex-start;
-    background: #e4e6eb;
-    color: #000;
-}
+    let liczby1 = [5, 10, 15, 20];
 
-.sent {
-    align-self: flex-end;
-    background: #0084ff;
-    color: white;
-}
+    document.getElementById("z2").innerText =
+        "Zadanie 2: Suma = " + sumaTablicy(liczby1);
 
-.input-container {
-    padding: 15px;
-    border-top: 1px solid #eee;
-    display: flex;
-    gap: 10px;
-}
 
-.input-container input {
-    flex: 1;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    font-size: 14px;
-}
+    // ===== ZADANIE 3 =====
+    let liczby2 = [3, 7, 1, 9, 4];
+    let max = liczby2[0];
 
-.input-container button {
-    background: #0084ff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-}
+    for (let i = 1; i < liczby2.length; i++) {
+        if (liczby2[i] > max) {
+            max = liczby2[i];
+        }
+    }
 
-.input-container button:hover {
-    background: #0073e6;
-}
+    document.getElementById("z3").innerText =
+        "Zadanie 3: Największa liczba = " + max;
+
+
+    // ===== ZADANIE 4 =====
+    let liczby3 = [2, 4, 6, 8, 10];
+
+    liczby3.unshift(0);
+    liczby3.push(12);
+
+    document.getElementById("z4").innerText =
+        "Zadanie 4: Tablica = " + liczby3;
+
+</script>
+
+</body>
+</html>
