@@ -2,85 +2,47 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Poziom 2 – Pętle + Logika</title>
+    <title>Poziom 3 – Metody tablic</title>
 </head>
 <body>
 
-<h2>Poziom 2 – Pętle + Logika</h2>
+<h2>Poziom 3 – Metody tablic</h2>
 
 <p id="z1"></p>
 <p id="z2"></p>
 <p id="z3"></p>
-<p id="z4"></p>
 
 <script>
 
     // ===== ZADANIE 1 =====
-    let oceny = [2, 3, 5, 4, 1, 5];
+    let liczby = [1, 2, 3, 4, 5];
 
-    let suma = 0;
-    let pozytywne = "";
-
-    for (let i = 0; i < oceny.length; i++) {
-        suma += oceny[i];
-
-        if (oceny[i] > 1) {   // pozytywne (2,3,4,5)
-            pozytywne += oceny[i] + " ";
-        }
-    }
-
-    let srednia = suma / oceny.length;
+    let kwadraty = liczby.map(function(liczba) {
+        return liczba * liczba;
+    });
 
     document.getElementById("z1").innerText =
-        "Zadanie 1: Średnia = " + srednia.toFixed(2) +
-        ", Oceny pozytywne = " + pozytywne;
+        "Zadanie 1: Kwadraty = " + kwadraty;
 
 
     // ===== ZADANIE 2 =====
-    function tylkoParzyste(tablica) {
-        let nowa = [];
+    let imiona = ["Anna", "Jan", "Krzysztof", "Ola"];
 
-        for (let i = 0; i < tablica.length; i++) {
-            if (tablica[i] % 2 === 0) {
-                nowa.push(tablica[i]);
-            }
-        }
-
-        return nowa;
-    }
-
-    let liczby = [1, 2, 3, 4, 5, 6];
+    let dluzsze = imiona.filter(function(imie) {
+        return imie.length > 3;
+    });
 
     document.getElementById("z2").innerText =
-        "Zadanie 2: Liczby parzyste = " + tylkoParzyste(liczby);
+        "Zadanie 2: Imiona dłuższe niż 3 znaki = " + dluzsze;
 
 
     // ===== ZADANIE 3 =====
-    let jezyki = ["HTML", "CSS", "JS"];
-    let odwrocona = [];
+    let liczby2 = [5, 10, 15];
 
-    for (let i = jezyki.length - 1; i >= 0; i--) {
-        odwrocona.push(jezyki[i]);
-    }
+    let jedenString = liczby2.join(" - ");
 
     document.getElementById("z3").innerText =
-        "Zadanie 3: Odwrocona tablica = " + odwrocona;
-
-
-    // ===== ZADANIE 4 =====
-    function czyZawiera(tablica, element) {
-        for (let i = 0; i < tablica.length; i++) {
-            if (tablica[i] === element) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    let wynik = czyZawiera(jezyki, "CSS");
-
-    document.getElementById("z4").innerText =
-        "Zadanie 4: Czy zawiera 'CSS'? = " + wynik;
+        "Zadanie 3: String = " + jedenString;
 
 </script>
 
