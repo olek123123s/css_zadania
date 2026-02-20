@@ -1,48 +1,75 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Poziom 3 – Metody tablic</title>
+<meta charset="UTF-8">
+<title>Poziom 4</title>
 </head>
 <body>
 
-<h2>Poziom 3 – Metody tablic</h2>
-
-<p id="z1"></p>
-<p id="z2"></p>
-<p id="z3"></p>
+<h2>Wyniki:</h2>
 
 <script>
 
-    // ===== ZADANIE 1 =====
-    let liczby = [1, 2, 3, 4, 5];
+// 1. Uczniowie
+const uczniowie = [
+  { imie: "Ola", punkty: 78 },
+  { imie: "Jan", punkty: 45 },
+  { imie: "Ania", punkty: 92 }
+];
 
-    let kwadraty = liczby.map(function(liczba) {
-        return liczba * liczba;
-    });
+let suma = 0;
 
-    document.getElementById("z1").innerText =
-        "Zadanie 1: Kwadraty = " + kwadraty;
+document.write("<b>Uczniowie którzy zdali:</b><br>");
 
+for (let i = 0; i < uczniowie.length; i++) {
+  suma = suma + uczniowie[i].punkty;
 
-    // ===== ZADANIE 2 =====
-    let imiona = ["Anna", "Jan", "Krzysztof", "Ola"];
+  if (uczniowie[i].punkty >= 50) {
+    document.write(uczniowie[i].imie + "<br>");
+  }
+}
 
-    let dluzsze = imiona.filter(function(imie) {
-        return imie.length > 3;
-    });
-
-    document.getElementById("z2").innerText =
-        "Zadanie 2: Imiona dłuższe niż 3 znaki = " + dluzsze;
+let srednia = suma / uczniowie.length;
+document.write("<br>Średnia: " + srednia + "<br><br>");
 
 
-    // ===== ZADANIE 3 =====
-    let liczby2 = [5, 10, 15];
+// 2. Usuwanie duplikatów
+function usunDuplikaty(tablica) {
+  let nowa = [];
 
-    let jedenString = liczby2.join(" - ");
+  for (let i = 0; i < tablica.length; i++) {
+    if (!nowa.includes(tablica[i])) {
+      nowa.push(tablica[i]);
+    }
+  }
 
-    document.getElementById("z3").innerText =
-        "Zadanie 3: String = " + jedenString;
+  return nowa;
+}
+
+let liczby = [1, 2, 2, 3, 4, 4, 5];
+document.write("<b>Bez duplikatów:</b> " + usunDuplikaty(liczby) + "<br><br>");
+
+
+// 3. Liczenie produktów
+let zakupy = ["chleb", "mleko", "ser", "chleb", "masło"];
+let wynik = {};
+
+for (let i = 0; i < zakupy.length; i++) {
+
+  let produkt = zakupy[i];
+
+  if (wynik[produkt]) {
+    wynik[produkt] = wynik[produkt] + 1;
+  } else {
+    wynik[produkt] = 1;
+  }
+}
+
+document.write("<b>Ilość produktów:</b><br>");
+
+for (let produkt in wynik) {
+  document.write(produkt + ": " + wynik[produkt] + "<br>");
+}
 
 </script>
 
