@@ -1,68 +1,71 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Poziom 2 - Konstruktor i Class</title>
+<meta charset="UTF-8">
+<title>Poziom 3 - Obiekty + DOM</title>
+<style>
+    body { font-family: Arial; }
+    .produkt {
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px;
+        width: 250px;
+    }
+    button { margin-right: 5px; }
+</style>
 </head>
 <body>
 
-<h1>POZIOM 2 – KONSTRUKTOR I CLASS</h1>
-
-<div id="wynik"></div>
+<h1>POZIOM 3 – OBIEKTY + DOM</h1>
+<div id="produkty"></div>
 
 <script>
-let output = "";
 
-// 6. Konstruktor
-function Uczen(imie, nazwisko, klasa) {
-    this.imie = imie;
-    this.nazwisko = nazwisko;
-    this.klasa = klasa;
-
-    this.przedstawSie = function() {
-        return "Nazywam się " + this.imie + " " +
-               this.nazwisko + 
-               " i chodzę do klasy " + this.klasa;
-    };
-}
-
-// 8. 3 uczniów
-let u1 = new Uczen("Jan", "Kowalski", "3A");
-let u2 = new Uczen("Anna", "Nowak", "2B");
-let u3 = new Uczen("Piotr", "Wiśniewski", "1C");
-
-output += "<h3>Uczniowie (konstruktor):</h3>";
-output += u1.przedstawSie() + "<br>";
-output += u2.przedstawSie() + "<br>";
-output += u3.przedstawSie() + "<br>";
-
-// 9. Wersja class
-class UczenClass {
-    constructor(imie, nazwisko, klasa) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.klasa = klasa;
+class Produkt {
+    constructor(nazwa, cena) {
+        this.nazwa = nazwa;
+        this.cena = cena;
     }
 
-    przedstawSie() {
-        return "Nazywam się " + this.imie + " " +
-               this.nazwisko + 
-               " i chodzę do klasy " + this.klasa;
-    }
+    render() {
+        const div = document.createElement("div");
+        div.className = "produkt";
 
-    // 10. Inicjały
-    inicjaly() {
-        return this.imie[0] + this.nazwisko[0];
+        const info = document.createElement("p");
+        info.innerText = this.nazwa + " - " + this.cena + " zł";
+
+        // Przycisk usuń
+        const usunBtn = document.createElement("button");
+        usunBtn.innerText = "Usuń";
+        usunBtn.onclick = () => div.remove();
+
+        // Przycisk promocja
+        const promoBtn = document.createElement("button");
+        promoBtn.innerText = "Promocja -20%";
+        promoBtn.onclick = () => {
+            this.cena = (this.cena * 0.8).toFixed(2);
+            info.innerText = this.nazwa + " - " + this.cena + " zł";
+        };
+
+        div.appendChild(info);
+        div.appendChild(usunBtn);
+        div.appendChild(promoBtn);
+
+        document.getElementById("produkty").appendChild(div);
     }
 }
 
-let u4 = new UczenClass("Kasia", "Lewandowska", "4D");
+// 4 produkty
+const produkty = [
+    new Produkt("Telefon", 3000),
+    new Produkt("Laptop", 5000),
+    new Produkt("Monitor", 1200),
+    new Produkt("Klawiatura", 300)
+];
 
-output += "<br><h3>Uczeń (class):</h3>";
-output += u4.przedstawSie() + "<br>";
-output += "Inicjały: " + u4.inicjaly();
+// generowanie na stronie
+produkty.forEach(p => p.render());
 
-document.getElementById("wynik").innerHTML = output;
 </script>
 
 </body>
