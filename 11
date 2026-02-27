@@ -2,60 +2,65 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Poziom 1 - Podstawy obiektów</title>
+    <title>Poziom 2 - Konstruktor i Class</title>
 </head>
 <body>
 
-<h1>POZIOM 1 – PODSTAWY OBIEKTÓW</h1>
+<h1>POZIOM 2 – KONSTRUKTOR I CLASS</h1>
 
 <div id="wynik"></div>
 
 <script>
 let output = "";
 
-// 1. Obiekt książka
-let ksiazka = {
-    tytul: "Władca Pierścieni",
-    autor: "J.R.R. Tolkien",
-    rokWydania: 1954,
-    opis: function() {
-        return "Tytuł: " + this.tytul + ", Autor: " + this.autor;
-    }
-};
+// 6. Konstruktor
+function Uczen(imie, nazwisko, klasa) {
+    this.imie = imie;
+    this.nazwisko = nazwisko;
+    this.klasa = klasa;
 
-// 2. Wypisanie właściwości
-output += "<h3>Właściwości książki:</h3>";
-for (let klucz in ksiazka) {
-    if (typeof ksiazka[klucz] !== "function") {
-        output += klucz + ": " + ksiazka[klucz] + "<br>";
+    this.przedstawSie = function() {
+        return "Nazywam się " + this.imie + " " +
+               this.nazwisko + 
+               " i chodzę do klasy " + this.klasa;
+    };
+}
+
+// 8. 3 uczniów
+let u1 = new Uczen("Jan", "Kowalski", "3A");
+let u2 = new Uczen("Anna", "Nowak", "2B");
+let u3 = new Uczen("Piotr", "Wiśniewski", "1C");
+
+output += "<h3>Uczniowie (konstruktor):</h3>";
+output += u1.przedstawSie() + "<br>";
+output += u2.przedstawSie() + "<br>";
+output += u3.przedstawSie() + "<br>";
+
+// 9. Wersja class
+class UczenClass {
+    constructor(imie, nazwisko, klasa) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.klasa = klasa;
+    }
+
+    przedstawSie() {
+        return "Nazywam się " + this.imie + " " +
+               this.nazwisko + 
+               " i chodzę do klasy " + this.klasa;
+    }
+
+    // 10. Inicjały
+    inicjaly() {
+        return this.imie[0] + this.nazwisko[0];
     }
 }
 
-// 3. Metoda opis()
-output += "<br><b>Opis:</b> " + ksiazka.opis() + "<br>";
+let u4 = new UczenClass("Kasia", "Lewandowska", "4D");
 
-// 4. Zmiana właściwości
-ksiazka.rokWydania = 2000;
-output += "<br>Nowy rok wydania: " + ksiazka.rokWydania + "<br>";
-
-// 5. Sprawdzenia
-output += "<br>Czy ma właściwość 'wydawnictwo'? " + 
-          ksiazka.hasOwnProperty("wydawnictwo") + "<br>";
-
-output += "Liczba właściwości: " + 
-          Object.keys(ksiazka).length + "<br>";
-
-// 6. Tablica produktów
-let produkty = [
-    { nazwa: "Telefon", cena: 3000 },
-    { nazwa: "Laptop", cena: 5000 },
-    { nazwa: "Monitor", cena: 1200 }
-];
-
-output += "<br><h3>Produkty:</h3>";
-produkty.forEach(p => {
-    output += p.nazwa + "<br>";
-});
+output += "<br><h3>Uczeń (class):</h3>";
+output += u4.przedstawSie() + "<br>";
+output += "Inicjały: " + u4.inicjaly();
 
 document.getElementById("wynik").innerHTML = output;
 </script>
