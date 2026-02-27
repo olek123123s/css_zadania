@@ -1,76 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Poziom 4</title>
+    <meta charset="UTF-8">
+    <title>Poziom 1 - Podstawy obiektów</title>
 </head>
 <body>
 
-<h2>Wyniki:</h2>
+<h1>POZIOM 1 – PODSTAWY OBIEKTÓW</h1>
+
+<div id="wynik"></div>
 
 <script>
+let output = "";
 
-// 1. Uczniowie
-const uczniowie = [
-  { imie: "Ola", punkty: 78 },
-  { imie: "Jan", punkty: 45 },
-  { imie: "Ania", punkty: 92 }
+// 1. Obiekt książka
+let ksiazka = {
+    tytul: "Władca Pierścieni",
+    autor: "J.R.R. Tolkien",
+    rokWydania: 1954,
+    opis: function() {
+        return "Tytuł: " + this.tytul + ", Autor: " + this.autor;
+    }
+};
+
+// 2. Wypisanie właściwości
+output += "<h3>Właściwości książki:</h3>";
+for (let klucz in ksiazka) {
+    if (typeof ksiazka[klucz] !== "function") {
+        output += klucz + ": " + ksiazka[klucz] + "<br>";
+    }
+}
+
+// 3. Metoda opis()
+output += "<br><b>Opis:</b> " + ksiazka.opis() + "<br>";
+
+// 4. Zmiana właściwości
+ksiazka.rokWydania = 2000;
+output += "<br>Nowy rok wydania: " + ksiazka.rokWydania + "<br>";
+
+// 5. Sprawdzenia
+output += "<br>Czy ma właściwość 'wydawnictwo'? " + 
+          ksiazka.hasOwnProperty("wydawnictwo") + "<br>";
+
+output += "Liczba właściwości: " + 
+          Object.keys(ksiazka).length + "<br>";
+
+// 6. Tablica produktów
+let produkty = [
+    { nazwa: "Telefon", cena: 3000 },
+    { nazwa: "Laptop", cena: 5000 },
+    { nazwa: "Monitor", cena: 1200 }
 ];
 
-let suma = 0;
+output += "<br><h3>Produkty:</h3>";
+produkty.forEach(p => {
+    output += p.nazwa + "<br>";
+});
 
-document.write("<b>Uczniowie którzy zdali:</b><br>");
-
-for (let i = 0; i < uczniowie.length; i++) {
-  suma = suma + uczniowie[i].punkty;
-
-  if (uczniowie[i].punkty >= 50) {
-    document.write(uczniowie[i].imie + "<br>");
-  }
-}
-
-let srednia = suma / uczniowie.length;
-document.write("<br>Średnia: " + srednia + "<br><br>");
-
-
-// 2. Usuwanie duplikatów
-function usunDuplikaty(tablica) {
-  let nowa = [];
-
-  for (let i = 0; i < tablica.length; i++) {
-    if (!nowa.includes(tablica[i])) {
-      nowa.push(tablica[i]);
-    }
-  }
-
-  return nowa;
-}
-
-let liczby = [1, 2, 2, 3, 4, 4, 5];
-document.write("<b>Bez duplikatów:</b> " + usunDuplikaty(liczby) + "<br><br>");
-
-
-// 3. Liczenie produktów
-let zakupy = ["chleb", "mleko", "ser", "chleb", "masło"];
-let wynik = {};
-
-for (let i = 0; i < zakupy.length; i++) {
-
-  let produkt = zakupy[i];
-
-  if (wynik[produkt]) {
-    wynik[produkt] = wynik[produkt] + 1;
-  } else {
-    wynik[produkt] = 1;
-  }
-}
-
-document.write("<b>Ilość produktów:</b><br>");
-
-for (let produkt in wynik) {
-  document.write(produkt + ": " + wynik[produkt] + "<br>");
-}
-
+document.getElementById("wynik").innerHTML = output;
 </script>
 
 </body>
