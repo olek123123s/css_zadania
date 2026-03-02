@@ -1,38 +1,21 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Poziom 4 - Dziedziczenie</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      padding: 20px;
-      background: #f4f4f4;
-    }
-
-    #wynik {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      line-height: 1.8;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Poziom 4</title>
 </head>
 <body>
 
-<h2>Poziom 4 — Dziedziczenie i Enkapsulacja</h2>
-
-<div id="wynik"></div>
+<h3>Wynik:</h3>
+<p id="wynik"></p>
 
 <script>
-  // funkcja do wyświetlania na stronie
+  // funkcja do wyświetlania
   function pokaz(tekst) {
     document.getElementById("wynik").innerHTML += tekst + "<br>";
   }
 
-  // 16. Klasa Osoba
+  // Klasa Osoba
   class Osoba {
     constructor(imie, wiek) {
       this.imie = imie;
@@ -40,23 +23,23 @@
     }
 
     przywitaj() {
-      pokaz(`Cześć, mam na imię ${this.imie}.`);
+      pokaz("Cześć, jestem " + this.imie);
     }
 
     get wiek() {
       return this._wiek;
     }
 
-    set wiek(nowyWiek) {
-      if (nowyWiek < 0) {
-        pokaz("❌ Błąd: wiek nie może być mniejszy niż 0!");
+    set wiek(w) {
+      if (w < 0) {
+        pokaz("Błąd: wiek < 0");
       } else {
-        this._wiek = nowyWiek;
+        this._wiek = w;
       }
     }
   }
 
-  // 17. Nauczyciel dziedziczy po Osoba
+  // Klasa Nauczyciel (dziedziczenie)
   class Nauczyciel extends Osoba {
     #pensja;
 
@@ -67,33 +50,32 @@
     }
 
     ucz() {
-      pokaz(`${this.imie} uczy przedmiotu: ${this.przedmiot}`);
+      pokaz(this.imie + " uczy " + this.przedmiot);
     }
 
-    // 18. Nadpisana metoda
+    // nadpisanie metody
     przywitaj() {
-      pokaz(`Dzień dobry, jestem ${this.imie} i uczę ${this.przedmiot}.`);
+      pokaz("Jestem nauczycielem " + this.imie);
     }
 
-    // 20. metoda zwracająca prywatną pensję
     pobierzPensje() {
       return this.#pensja;
     }
   }
 
-  // ===== Test =====
-  const nauczyciel = new Nauczyciel("Anna", 30, "Matematyka", 6000);
+  // Test
+  let n = new Nauczyciel("Anna", 30, "Matematyka", 5000);
 
-  nauczyciel.przywitaj();
-  nauczyciel.ucz();
+  n.przywitaj();
+  n.ucz();
 
-  pokaz("Wiek: " + nauczyciel.wiek);
+  pokaz("Wiek: " + n.wiek);
 
-  nauczyciel.wiek = -5; // błąd
-  nauczyciel.wiek = 40;
+  n.wiek = -1; // błąd
+  n.wiek = 40;
 
-  pokaz("Nowy wiek: " + nauczyciel.wiek);
-  pokaz("Pensja: " + nauczyciel.pobierzPensje());
+  pokaz("Nowy wiek: " + n.wiek);
+  pokaz("Pensja: " + n.pobierzPensje());
 </script>
 
 </body>
