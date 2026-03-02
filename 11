@@ -1,71 +1,99 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Poziom 3 - Obiekty + DOM</title>
-<style>
-    body { font-family: Arial; }
-    .produkt {
-        border: 1px solid black;
-        padding: 10px;
-        margin: 10px;
-        width: 250px;
+  <meta charset="UTF-8">
+  <title>Poziom 4 - Dziedziczenie</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f4f4f4;
     }
-    button { margin-right: 5px; }
-</style>
+
+    #wynik {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      line-height: 1.8;
+    }
+  </style>
 </head>
 <body>
 
-<h1>POZIOM 3 – OBIEKTY + DOM</h1>
-<div id="produkty"></div>
+<h2>Poziom 4 — Dziedziczenie i Enkapsulacja</h2>
+
+<div id="wynik"></div>
 
 <script>
+  // funkcja do wyświetlania na stronie
+  function pokaz(tekst) {
+    document.getElementById("wynik").innerHTML += tekst + "<br>";
+  }
 
-class Produkt {
-    constructor(nazwa, cena) {
-        this.nazwa = nazwa;
-        this.cena = cena;
+  // 16. Klasa Osoba
+  class Osoba {
+    constructor(imie, wiek) {
+      this.imie = imie;
+      this._wiek = wiek;
     }
 
-    render() {
-        const div = document.createElement("div");
-        div.className = "produkt";
-
-        const info = document.createElement("p");
-        info.innerText = this.nazwa + " - " + this.cena + " zł";
-
-        // Przycisk usuń
-        const usunBtn = document.createElement("button");
-        usunBtn.innerText = "Usuń";
-        usunBtn.onclick = () => div.remove();
-
-        // Przycisk promocja
-        const promoBtn = document.createElement("button");
-        promoBtn.innerText = "Promocja -20%";
-        promoBtn.onclick = () => {
-            this.cena = (this.cena * 0.8).toFixed(2);
-            info.innerText = this.nazwa + " - " + this.cena + " zł";
-        };
-
-        div.appendChild(info);
-        div.appendChild(usunBtn);
-        div.appendChild(promoBtn);
-
-        document.getElementById("produkty").appendChild(div);
+    przywitaj() {
+      pokaz(`Cześć, mam na imię ${this.imie}.`);
     }
-}
 
-// 4 produkty
-const produkty = [
-    new Produkt("Telefon", 3000),
-    new Produkt("Laptop", 5000),
-    new Produkt("Monitor", 1200),
-    new Produkt("Klawiatura", 300)
-];
+    get wiek() {
+      return this._wiek;
+    }
 
-// generowanie na stronie
-produkty.forEach(p => p.render());
+    set wiek(nowyWiek) {
+      if (nowyWiek < 0) {
+        pokaz("❌ Błąd: wiek nie może być mniejszy niż 0!");
+      } else {
+        this._wiek = nowyWiek;
+      }
+    }
+  }
 
+  // 17. Nauczyciel dziedziczy po Osoba
+  class Nauczyciel extends Osoba {
+    #pensja;
+
+    constructor(imie, wiek, przedmiot, pensja) {
+      super(imie, wiek);
+      this.przedmiot = przedmiot;
+      this.#pensja = pensja;
+    }
+
+    ucz() {
+      pokaz(`${this.imie} uczy przedmiotu: ${this.przedmiot}`);
+    }
+
+    // 18. Nadpisana metoda
+    przywitaj() {
+      pokaz(`Dzień dobry, jestem ${this.imie} i uczę ${this.przedmiot}.`);
+    }
+
+    // 20. metoda zwracająca prywatną pensję
+    pobierzPensje() {
+      return this.#pensja;
+    }
+  }
+
+  // ===== Test =====
+  const nauczyciel = new Nauczyciel("Anna", 30, "Matematyka", 6000);
+
+  nauczyciel.przywitaj();
+  nauczyciel.ucz();
+
+  pokaz("Wiek: " + nauczyciel.wiek);
+
+  nauczyciel.wiek = -5; // błąd
+  nauczyciel.wiek = 40;
+
+  pokaz("Nowy wiek: " + nauczyciel.wiek);
+  pokaz("Pensja: " + nauczyciel.pobierzPensje());
 </script>
 
 </body>
