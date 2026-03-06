@@ -2,26 +2,38 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Poziom 1</title>
+<title>Poziom 2</title>
 </head>
 <body>
 
-<h2>Poziom 1 - Podstawy String</h2>
+<h2>Poziom 2 - Wycinanie i szukanie</h2>
 
 <div id="wyniki"></div>
 
 <script>
 
-let tekst = " Programowanie jest super! ";
+let dane = "Marcin;Kowalski;30;Gdańsk";
+let nazwisko = dane.split(";")[1];
 
-let wyniki = `
-<p>Długość tekstu: ${tekst.length}</p>
-<p>Bez spacji: ${tekst.trim()}</p>
-<p>Wielkie litery: ${tekst.toUpperCase()}</p>
-<p>Czy zawiera "super": ${tekst.includes("super")}</p>
+function czyPolskiEmail(mail){
+return mail.endsWith(".pl");
+}
+
+let zdanie = "Lubię koty, bo koty są puszyste";
+let nowe = zdanie.replace("koty","psy");
+
+let imie = "Marcin";
+let pierwsza = imie.at(0);
+let ostatnia = imie.at(-1);
+
+document.getElementById("wyniki").innerHTML = `
+<p>Nazwisko: ${nazwisko}</p>
+<p>Email test@gmail.pl kończy się na .pl: ${czyPolskiEmail("test@gmail.pl")}</p>
+<p>Email test@gmail.com kończy się na .pl: ${czyPolskiEmail("test@gmail.com")}</p>
+<p>Zmiana zdania: ${nowe}</p>
+<p>Pierwsza litera imienia: ${pierwsza}</p>
+<p>Ostatnia litera imienia: ${ostatnia}</p>
 `;
-
-document.getElementById("wyniki").innerHTML = wyniki;
 
 </script>
 
