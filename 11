@@ -2,80 +2,27 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Poziom 4</title>
+<title>Poziom 1</title>
 </head>
 <body>
 
-<h3>Wynik:</h3>
-<p id="wynik"></p>
+<h2>Poziom 1 - Podstawy String</h2>
+
+<div id="wyniki"></div>
 
 <script>
-  // funkcja do wyświetlania
-  function pokaz(tekst) {
-    document.getElementById("wynik").innerHTML += tekst + "<br>";
-  }
 
-  // Klasa Osoba
-  class Osoba {
-    constructor(imie, wiek) {
-      this.imie = imie;
-      this._wiek = wiek;
-    }
+let tekst = " Programowanie jest super! ";
 
-    przywitaj() {
-      pokaz("Cześć, jestem " + this.imie);
-    }
+let wyniki = `
+<p>Długość tekstu: ${tekst.length}</p>
+<p>Bez spacji: ${tekst.trim()}</p>
+<p>Wielkie litery: ${tekst.toUpperCase()}</p>
+<p>Czy zawiera "super": ${tekst.includes("super")}</p>
+`;
 
-    get wiek() {
-      return this._wiek;
-    }
+document.getElementById("wyniki").innerHTML = wyniki;
 
-    set wiek(w) {
-      if (w < 0) {
-        pokaz("Błąd: wiek < 0");
-      } else {
-        this._wiek = w;
-      }
-    }
-  }
-
-  // Klasa Nauczyciel (dziedziczenie)
-  class Nauczyciel extends Osoba {
-    #pensja;
-
-    constructor(imie, wiek, przedmiot, pensja) {
-      super(imie, wiek);
-      this.przedmiot = przedmiot;
-      this.#pensja = pensja;
-    }
-
-    ucz() {
-      pokaz(this.imie + " uczy " + this.przedmiot);
-    }
-
-    // nadpisanie metody
-    przywitaj() {
-      pokaz("Jestem nauczycielem " + this.imie);
-    }
-
-    pobierzPensje() {
-      return this.#pensja;
-    }
-  }
-
-  // Test
-  let n = new Nauczyciel("Anna", 30, "Matematyka", 5000);
-
-  n.przywitaj();
-  n.ucz();
-
-  pokaz("Wiek: " + n.wiek);
-
-  n.wiek = -1; // błąd
-  n.wiek = 40;
-
-  pokaz("Nowy wiek: " + n.wiek);
-  pokaz("Pensja: " + n.pobierzPensje());
 </script>
 
 </body>
