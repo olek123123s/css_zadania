@@ -2,38 +2,44 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Poziom 2</title>
+<title>Poziom 3</title>
 </head>
 <body>
 
-<h2>Poziom 2 - Wycinanie i szukanie</h2>
+<h2>Sprawdzanie PESEL</h2>
 
-<div id="wyniki"></div>
+<input id="pesel" placeholder="Wpisz PESEL">
+<button onclick="sprawdz()">Sprawdź</button>
+
+<p id="wynik"></p>
+<p id="maskowany"></p>
 
 <script>
 
-let dane = "Marcin;Kowalski;30;Gdańsk";
-let nazwisko = dane.split(";")[1];
+function sprawdz(){
 
-function czyPolskiEmail(mail){
-return mail.endsWith(".pl");
+let pesel = document.getElementById("pesel").value;
+let wynik = document.getElementById("wynik");
+let maskowany = document.getElementById("maskowany");
+
+if(pesel.length === 11){
+wynik.textContent = "PESEL poprawny";
+wynik.style.color = "green";
+}else{
+wynik.textContent = "Błąd - PESEL musi mieć 11 znaków";
+wynik.style.color = "red";
 }
 
-let zdanie = "Lubię koty, bo koty są puszyste";
-let nowe = zdanie.replace("koty","psy");
+maskowany.textContent = "Maskowany PESEL: " + maskujPesel(pesel);
 
-let imie = "Marcin";
-let pierwsza = imie.at(0);
-let ostatnia = imie.at(-1);
+}
 
-document.getElementById("wyniki").innerHTML = `
-<p>Nazwisko: ${nazwisko}</p>
-<p>Email test@gmail.pl kończy się na .pl: ${czyPolskiEmail("test@gmail.pl")}</p>
-<p>Email test@gmail.com kończy się na .pl: ${czyPolskiEmail("test@gmail.com")}</p>
-<p>Zmiana zdania: ${nowe}</p>
-<p>Pierwsza litera imienia: ${pierwsza}</p>
-<p>Ostatnia litera imienia: ${ostatnia}</p>
-`;
+function maskujPesel(pesel){
+
+let koniec = pesel.slice(-4);
+return "*******" + koniec;
+
+}
 
 </script>
 
