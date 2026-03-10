@@ -1,47 +1,27 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<title>Poziom 3</title>
-</head>
-<body>
+package clinic.client;
 
-<h2>Sprawdzanie PESEL</h2>
+import clinic.core.Pacjent;
+import clinic.core.Doktor;
 
-<input id="pesel" placeholder="Wpisz PESEL">
-<button onclick="sprawdz()">Sprawdź</button>
+public class ReceptionApp {
 
-<p id="wynik"></p>
-<p id="maskowany"></p>
+    public static void main(String[] args) {
 
-<script>
+        // utworzenie obiektów
+        Pacjent pacjent = new Pacjent("Jan", "12345678901");
+        Doktor doktor = new Doktor();
 
-function sprawdz(){
+        // wypisanie imienia pacjenta
+        System.out.println(pacjent.getName());
 
-let pesel = document.getElementById("pesel").value;
-let wynik = document.getElementById("wynik");
-let maskowany = document.getElementById("maskowany");
+        // System.out.println(pacjent.pesel);
+        // Błąd kompilatora, ponieważ pole pesel jest private w klasie Pacjent.
 
-if(pesel.length === 11){
-wynik.textContent = "PESEL poprawny";
-wynik.style.color = "green";
-}else{
-wynik.textContent = "Błąd - PESEL musi mieć 11 znaków";
-wynik.style.color = "red";
+        // pacjent.setKodChoroby("A01");
+        // Błąd kompilatora, ponieważ metoda setKodChoroby ma dostęp package-private
+        // i nie jest dostępna poza pakietem clinic.core.
+
+        // poprawne wywołanie diagnozy przez lekarza
+        doktor.diagnoza(pacjent, "A01");
+    }
 }
-
-maskowany.textContent = "Maskowany PESEL: " + maskujPesel(pesel);
-
-}
-
-function maskujPesel(pesel){
-
-let koniec = pesel.slice(-4);
-return "*******" + koniec;
-
-}
-
-</script>
-
-</body>
-</html>
