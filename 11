@@ -2,28 +2,48 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Poziom 1</title>
+<title>Poziom 2</title>
+<style>
+    .error {
+        border: 2px solid red;
+    }
+</style>
 </head>
 <body>
 
-<h2>Poziom 1</h2>
+<h2>Poziom 2</h2>
 
-<form id="form1">
-    <input type="text" id="text1" placeholder="Wpisz coś">
-    <input type="checkbox" id="check1"> Checkbox
-    <br><br>
-    <button type="submit">Wyślij</button>
-</form>
+<input type="text" id="liveText" placeholder="Pisz...">
+<p>Liczba znaków: <span id="count">0</span></p>
+
+<input type="password" id="haslo" placeholder="Hasło (min 8 znaków)">
+<br><br>
+
+<select id="kolor">
+    <option value="">Wybierz kolor</option>
+    <option value="red">Czerwony</option>
+    <option value="green">Zielony</option>
+    <option value="blue">Niebieski</option>
+</select>
 
 <script>
-document.getElementById("form1").addEventListener("submit", function(e) {
-    e.preventDefault();
+// liczenie znaków
+document.getElementById("liveText").addEventListener("input", function() {
+    document.getElementById("count").textContent = this.value.length;
+});
 
-    const text = document.getElementById("text1").value;
-    const check = document.getElementById("check1").checked;
+// walidacja hasła
+document.getElementById("haslo").addEventListener("blur", function() {
+    if(this.value.length < 8) {
+        this.classList.add("error");
+    } else {
+        this.classList.remove("error");
+    }
+});
 
-    console.log("Tekst:", text);
-    console.log("Checkbox:", check);
+// zmiana tła
+document.getElementById("kolor").addEventListener("change", function() {
+    document.body.style.backgroundColor = this.value;
 });
 </script>
 
