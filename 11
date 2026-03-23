@@ -1,114 +1,30 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Data i czas</title>
+<meta charset="UTF-8">
+<title>Poziom 1</title>
 </head>
 <body>
 
-<h2>Zadania - Data i czas</h2>
+<h2>Poziom 1</h2>
 
-<p id="godzina"></p>
-<p id="dataPL"></p>
-<p id="dzien"></p>
-
-<h3>Zegar:</h3>
-<p id="zegar"></p>
-
-<h3>Sprawdz ile dni zostalo:</h3>
-<input type="date" id="dataInput">
-<button onclick="sprawdzDni()">Sprawdz</button>
-<p id="wynik"></p>
+<form id="form1">
+    <input type="text" id="text1" placeholder="Wpisz coś">
+    <input type="checkbox" id="check1"> Checkbox
+    <br><br>
+    <button type="submit">Wyślij</button>
+</form>
 
 <script>
-// Poziom 1
+document.getElementById("form1").addEventListener("submit", function(e) {
+    e.preventDefault();
 
+    const text = document.getElementById("text1").value;
+    const check = document.getElementById("check1").checked;
 
-let teraz = new Date();
-
-
-console.log("Rok:", teraz.getFullYear());
-console.log("Miesiac:", teraz.getMonth() + 1);
-console.log("Dzien:", teraz.getDate());
-
-
-let urodziny = new Date("2008-05-10");
-
-
-let godz = teraz.getHours();
-let min = teraz.getMinutes();
-
-if(min < 10) min = "0" + min;
-
-document.getElementById("godzina").innerText =
-    "Jest godzina: " + godz + ":" + min;
-
-
-let dni = ["Niedziela","Poniedziaek","Wtorek","Sroda","Czwartek","Piatek","Sobota"];
-let dzienUrodzin = dni[urodziny.getDay()];
-console.log("Urodziny byly w:", dzienUrodzin);
-
-
-// poziom 2
-function dodaj7Dni() {
-    let data = new Date();
-    data.setDate(data.getDate() + 7);
-    return data;
-}
-console.log("Za 7 dni:", dodaj7Dni());
-
-
-document.getElementById("dataPL").innerText =
-    "Data PL: " + teraz.toLocaleDateString("pl-PL");
-
-
-let minuty = teraz.getHours() * 60 + teraz.getMinutes();
-console.log("Minuty od polnocy:", minuty);
-
-
-let dzis = dni[teraz.getDay()];
-document.getElementById("dzien").innerText =
-    "Dzisiaj jest: " + dzis;
-
-
-// Poziom 3
-function zegar() {
-    let t = new Date();
-    let h = t.getHours();
-    let m = t.getMinutes();
-    let s = t.getSeconds();
-
-    if(m < 10) m = "0" + m;
-    if(s < 10) s = "0" + s;
-
-    document.getElementById("zegar").innerText =
-        h + ":" + m + ":" + s;
-}
-
-setInterval(zegar, 1000);
-
-let godzina = teraz.getHours();
-
-if(godzina >= 20 || godzina < 6) {
-    document.body.style.backgroundColor = "black";
-    document.body.style.color = "white";
-} else {
-    document.body.style.backgroundColor = "white";
-    document.body.style.color = "black";
-}
-
-function sprawdzDni() {
-    let wybrana = new Date(document.getElementById("dataInput").value);
-    let dzis = new Date();
-
-    let roznica = wybrana - dzis;
-
-    let dni = Math.ceil(roznica / (1000 * 60 * 60 * 24));
-
-    document.getElementById("wynik").innerText =
-        "Zostalo dni: " + dni;
-}
-
+    console.log("Tekst:", text);
+    console.log("Checkbox:", check);
+});
 </script>
 
 </body>
