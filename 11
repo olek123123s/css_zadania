@@ -1,44 +1,58 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
-public class SezonLigi {
-    private ArrayList<MeczPilkarski> mecze;
+public class Main {
+    public static void main(String[] args) {
 
-    public SezonLigi() {
-        mecze = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        SezonLigi sezon = new SezonLigi();
 
-        // dane startowe
-        mecze.add(new MeczPilkarski("Barcelona", 50000, 120, true));
-        mecze.add(new MeczPilkarski("Real", 60000, 150, false));
-    }
+        int wybor;
 
-    public void dodajMecz(MeczPilkarski mecz) {
-        mecze.add(mecz);
-    }
+        do {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Dodaj mecz");
+            System.out.println("2. Wyświetl mecze");
+            System.out.println("3. Największy przychód");
+            System.out.println("4. Test walidacji");
+            System.out.println("0. Wyjście");
 
-    public void wyswietl() {
-        if (mecze.isEmpty()) {
-            System.out.println("Brak meczów!");
-            return;
-        }
+            wybor = sc.nextInt();
+            sc.nextLine();
 
-        for (MeczPilkarski m : mecze) {
-            System.out.println(m);
-        }
-    }
+            switch (wybor) {
+                case 1:
+                    System.out.print("Przeciwnik: ");
+                    String przeciwnik = sc.nextLine();
 
-    // metoda analityczna
-    public void najlepszyPrzychod() {
-        if (mecze.isEmpty()) return;
+                    System.out.print("Liczba kibiców: ");
+                    int kibice = sc.nextInt();
 
-        MeczPilkarski best = mecze.get(0);
+                    System.out.print("Cena biletu: ");
+                    double cena = sc.nextDouble();
 
-        for (MeczPilkarski m : mecze) {
-            if (m.getPrzychod() > best.getPrzychod()) {
-                best = m;
+                    System.out.print("Czy wygrany (true/false): ");
+                    boolean wygrany = sc.nextBoolean();
+
+                    sezon.dodajMecz(new MeczPilkarski(przeciwnik, kibice, cena, wygrany));
+                    break;
+
+                case 2:
+                    sezon.wyswietl();
+                    break;
+
+                case 3:
+                    sezon.najlepszyPrzychod();
+                    break;
+
+                case 4:
+                    System.out.println("Test walidacji:");
+                    MeczPilkarski test = new MeczPilkarski();
+                    test.setLiczbaKibicow(-10); // powinien pokazać błąd
+                    break;
             }
-        }
 
-        System.out.println("\nNajwiększy przychód:");
-        System.out.println(best);
+        } while (wybor != 0);
+
+        sc.close();
     }
 }
