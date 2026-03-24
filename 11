@@ -1,51 +1,69 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<title>Poziom 2</title>
-<style>
-    .error {
-        border: 2px solid red;
+public class MeczPilkarski {
+    private String przeciwnik;
+    private int liczbaKibicow;
+    private double cenaBiletu;
+    private boolean czyWygrany;
+
+    // Konstruktor domyślny
+    public MeczPilkarski() {
     }
-</style>
-</head>
-<body>
 
-<h2>Poziom 2</h2>
-
-<input type="text" id="liveText" placeholder="Pisz...">
-<p>Liczba znaków: <span id="count">0</span></p>
-
-<input type="password" id="haslo" placeholder="Hasło (min 8 znaków)">
-<br><br>
-
-<select id="kolor">
-    <option value="">Wybierz kolor</option>
-    <option value="red">Czerwony</option>
-    <option value="green">Zielony</option>
-    <option value="blue">Niebieski</option>
-</select>
-
-<script>
-// liczenie znaków
-document.getElementById("liveText").addEventListener("input", function() {
-    document.getElementById("count").textContent = this.value.length;
-});
-
-// walidacja hasła
-document.getElementById("haslo").addEventListener("blur", function() {
-    if(this.value.length < 8) {
-        this.classList.add("error");
-    } else {
-        this.classList.remove("error");
+    // Konstruktor parametryczny
+    public MeczPilkarski(String przeciwnik, int liczbaKibicow, double cenaBiletu, boolean czyWygrany) {
+        this.przeciwnik = przeciwnik;
+        setLiczbaKibicow(liczbaKibicow); // walidacja
+        this.cenaBiletu = cenaBiletu;
+        this.czyWygrany = czyWygrany;
     }
-});
 
-// zmiana tła
-document.getElementById("kolor").addEventListener("change", function() {
-    document.body.style.backgroundColor = this.value;
-});
-</script>
+    // Gettery i settery
+    public String getPrzeciwnik() {
+        return przeciwnik;
+    }
 
-</body>
-</html>
+    public void setPrzeciwnik(String przeciwnik) {
+        this.przeciwnik = przeciwnik;
+    }
+
+    public int getLiczbaKibicow() {
+        return liczbaKibicow;
+    }
+
+    // WALIDACJA
+    public void setLiczbaKibicow(int liczbaKibicow) {
+        if (liczbaKibicow < 0) {
+            System.out.println("BŁĄD: liczba kibiców nie może być ujemna!");
+        } else {
+            this.liczbaKibicow = liczbaKibicow;
+        }
+    }
+
+    public double getCenaBiletu() {
+        return cenaBiletu;
+    }
+
+    public void setCenaBiletu(double cenaBiletu) {
+        this.cenaBiletu = cenaBiletu;
+    }
+
+    public boolean isCzyWygrany() {
+        return czyWygrany;
+    }
+
+    public void setCzyWygrany(boolean czyWygrany) {
+        this.czyWygrany = czyWygrany;
+    }
+
+    // Metoda biznesowa
+    public double obliczPrzychod() {
+        return liczbaKibicow * cenaBiletu;
+    }
+
+    @Override
+    public String toString() {
+        return "Przeciwnik: " + przeciwnik +
+                ", Kibice: " + liczbaKibicow +
+                ", Cena biletu: " + cenaBiletu +
+                ", Wygrany: " + (czyWygrany ? "Tak" : "Nie");
+    }
+}
