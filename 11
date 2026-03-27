@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Poziom 4</title>
+</head>
 <body>
 
-<h3>Rejestracja</h3>
+<h2>Rejestracja</h2>
 
-<form onsubmit="sprawdz(event)">
-  <input id="email" placeholder="E-mail"><br><br>
-  <input id="haslo" type="password" placeholder="Hasło"><br><br>
-  <input id="haslo2" type="password" placeholder="Powtórz hasło"><br><br>
-
-  <button>Zarejestruj</button>
+<form id="form">
+  <input type="email" id="email" placeholder="E-mail"><br><br>
+  <input type="password" id="password" placeholder="Hasło"><br><br>
+  <input type="password" id="confirm" placeholder="Powtórz hasło"><br><br>
+  <button type="submit">Zarejestruj</button>
 </form>
 
-<p id="msg" style="color:red;"></p>
-
 <script>
-function sprawdz(e) {
+document.getElementById("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  let email = document.getElementById("email").value;
-  let h1 = document.getElementById("haslo").value;
-  let h2 = document.getElementById("haslo2").value;
-
-  let msg = document.getElementById("msg");
-
-  msg.textContent = "";
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirm").value;
 
   if (!email.includes("@")) {
-    msg.textContent = "Zły email";
-  } else if (h1 !== h2) {
-    msg.textContent = "Hasła nie są zgodne";
-  } else {
-    msg.style.color = "green";
-    msg.textContent = "OK";
+    alert("Niepoprawny email");
+    return;
   }
-}
+
+  if (password.length < 6) {
+    alert("Hasło za krótkie");
+    return;
+  }
+
+  if (password !== confirm) {
+    alert("Hasła się nie zgadzają");
+    return;
+  }
+
+  alert("OK!");
+});
 </script>
 
 </body>
