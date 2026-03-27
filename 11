@@ -1,58 +1,41 @@
-import java.util.Scanner;
+<!DOCTYPE html>
+<html>
+<body>
 
-public class Main {
-    public static void main(String[] args) {
+<h3>Rejestracja</h3>
 
-        Scanner sc = new Scanner(System.in);
-        SezonLigi sezon = new SezonLigi();
+<form onsubmit="sprawdz(event)">
+  <input id="email" placeholder="E-mail"><br><br>
+  <input id="haslo" type="password" placeholder="Hasło"><br><br>
+  <input id="haslo2" type="password" placeholder="Powtórz hasło"><br><br>
 
-        int wybor;
+  <button>Zarejestruj</button>
+</form>
 
-        do {
-            System.out.println("\n--- MENU ---");
-            System.out.println("1. Dodaj mecz");
-            System.out.println("2. Wyświetl mecze");
-            System.out.println("3. Największy przychód");
-            System.out.println("4. Test walidacji");
-            System.out.println("0. Wyjście");
+<p id="msg" style="color:red;"></p>
 
-            wybor = sc.nextInt();
-            sc.nextLine();
+<script>
+function sprawdz(e) {
+  e.preventDefault();
 
-            switch (wybor) {
-                case 1:
-                    System.out.print("Przeciwnik: ");
-                    String przeciwnik = sc.nextLine();
+  let email = document.getElementById("email").value;
+  let h1 = document.getElementById("haslo").value;
+  let h2 = document.getElementById("haslo2").value;
 
-                    System.out.print("Liczba kibiców: ");
-                    int kibice = sc.nextInt();
+  let msg = document.getElementById("msg");
 
-                    System.out.print("Cena biletu: ");
-                    double cena = sc.nextDouble();
+  msg.textContent = "";
 
-                    System.out.print("Czy wygrany (true/false): ");
-                    boolean wygrany = sc.nextBoolean();
-
-                    sezon.dodajMecz(new MeczPilkarski(przeciwnik, kibice, cena, wygrany));
-                    break;
-
-                case 2:
-                    sezon.wyswietl();
-                    break;
-
-                case 3:
-                    sezon.najlepszyPrzychod();
-                    break;
-
-                case 4:
-                    System.out.println("Test walidacji:");
-                    MeczPilkarski test = new MeczPilkarski();
-                    test.setLiczbaKibicow(-10); // powinien pokazać błąd
-                    break;
-            }
-
-        } while (wybor != 0);
-
-        sc.close();
-    }
+  if (!email.includes("@")) {
+    msg.textContent = "Zły email";
+  } else if (h1 !== h2) {
+    msg.textContent = "Hasła nie są zgodne";
+  } else {
+    msg.style.color = "green";
+    msg.textContent = "OK";
+  }
 }
+</script>
+
+</body>
+</html>
