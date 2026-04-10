@@ -2,32 +2,36 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Poziom 1</title>
+  <title>Poziom 2</title>
 </head>
 <body>
 
-<button id="btn">Kliknij mnie</button>
+<p id="counter">0</p>
+<button id="add">Kliknij +1</button>
+<button id="reset">Reset</button>
 
 <script>
-const btn = document.getElementById("btn");
+let count = 0;
+const counter = document.getElementById("counter");
+const addBtn = document.getElementById("add");
+const resetBtn = document.getElementById("reset");
 
-// alert
-btn.addEventListener("click", () => {
-  alert("Witaj!");
+// zwiększanie
+addBtn.addEventListener("click", () => {
+  count++;
+  counter.textContent = count;
+
+  // blokada na 5 sek
+  addBtn.disabled = true;
+  setTimeout(() => {
+    addBtn.disabled = false;
+  }, 5000);
 });
 
-// zmiana tekstu
-btn.addEventListener("click", () => {
-  btn.textContent = "Zostałem kliknięty!";
-});
-
-// hover
-btn.addEventListener("mouseover", () => {
-  btn.style.backgroundColor = "yellow";
-});
-
-btn.addEventListener("mouseout", () => {
-  btn.style.backgroundColor = "";
+// reset
+resetBtn.addEventListener("click", () => {
+  count = 0;
+  counter.textContent = count;
 });
 </script>
 
