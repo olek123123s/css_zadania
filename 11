@@ -9,6 +9,9 @@
 <div id="app"></div>
 
 <script>
+// globalny licznik kliknięć
+let clickCount = 0;
+
 class SmartButton {
   constructor(text, color) {
     this.text = text;
@@ -22,7 +25,8 @@ class SmartButton {
     btn.style.margin = "5px";
 
     btn.addEventListener("click", () => {
-      alert("Kliknięto: " + this.text);
+      clickCount++; // zwiększamy licznik
+      alert("Kliknięto " + clickCount + " razy");
     });
 
     document.getElementById("app").appendChild(btn);
