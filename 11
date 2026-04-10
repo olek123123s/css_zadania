@@ -1,44 +1,33 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Poziom 4</title>
+  <meta charset="UTF-8">
+  <title>Poziom 1</title>
 </head>
 <body>
 
-<h2>Rejestracja</h2>
-
-<form id="form">
-  <input type="email" id="email" placeholder="E-mail"><br><br>
-  <input type="password" id="password" placeholder="Hasło"><br><br>
-  <input type="password" id="confirm" placeholder="Powtórz hasło"><br><br>
-  <button type="submit">Zarejestruj</button>
-</form>
+<button id="btn">Kliknij mnie</button>
 
 <script>
-document.getElementById("form").addEventListener("submit", function(e) {
-  e.preventDefault();
+const btn = document.getElementById("btn");
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const confirm = document.getElementById("confirm").value;
+// alert
+btn.addEventListener("click", () => {
+  alert("Witaj!");
+});
 
-  if (!email.includes("@")) {
-    alert("Niepoprawny email");
-    return;
-  }
+// zmiana tekstu
+btn.addEventListener("click", () => {
+  btn.textContent = "Zostałem kliknięty!";
+});
 
-  if (password.length < 6) {
-    alert("Hasło za krótkie");
-    return;
-  }
+// hover
+btn.addEventListener("mouseover", () => {
+  btn.style.backgroundColor = "yellow";
+});
 
-  if (password !== confirm) {
-    alert("Hasła się nie zgadzają");
-    return;
-  }
-
-  alert("OK!");
+btn.addEventListener("mouseout", () => {
+  btn.style.backgroundColor = "";
 });
 </script>
 
