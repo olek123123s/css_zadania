@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Poziom 4</title>
+<meta charset="UTF-8">
+<title>Poziom 1</title>
 </head>
 <body>
 
-<div id="app"></div>
+<img id="photo" src="https://picsum.photos/300?1" width="300">
+<br><br>
+
+<button onclick="changePhoto()">Zmień zdjęcie</button>
+<button onclick="resetPhoto()">Reset</button>
 
 <script>
-class SmartButton {
-  constructor(text, color) {
-    this.text = text;
-    this.color = color;
-    this.count = 0; // licznik dla TEGO przycisku
-  }
+const original = "https://picsum.photos/300?1";
 
-  render() {
-    const btn = document.createElement("button");
-    btn.textContent = this.text;
-    btn.style.backgroundColor = this.color;
-    btn.style.margin = "5px";
-
-    btn.addEventListener("click", () => {
-      this.count++; // zwiększamy licznik tylko dla tego obiektu
-      alert(this.text + " kliknięty " + this.count + " razy");
-    });
-
-    document.getElementById("app").appendChild(btn);
-  }
+function changePhoto() {
+    document.getElementById("photo").src = "https://picsum.photos/300?2";
 }
 
-// tworzenie 5 przycisków
-const colors = ["lightblue", "lightgreen", "lightcoral", "orange", "violet"];
-
-for (let i = 0; i < 5; i++) {
-  const btn = new SmartButton("Przycisk " + (i + 1), colors[i]);
-  btn.render();
+function resetPhoto() {
+    document.getElementById("photo").src = original;
 }
 </script>
 
